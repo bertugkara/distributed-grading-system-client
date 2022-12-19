@@ -19,7 +19,7 @@ export default function SignedInNavBar(props) {
     const { collapseSidebar, toggleSidebar, collapsed, toggled } = useProSidebar();
 
     const navigate = useNavigate();
-    const [setAnchorEl] = useState(null);
+    const [anchorEl,setAnchorEl] = useState(null);
 
     const handleCloseProfile = () => {
         setAnchorEl(null);

@@ -11,12 +11,14 @@ import NavigationBar from "./components/layouts/NavigationBar/NavigationBar";
 import './App.css'
 import {ProSidebarProvider} from 'react-pro-sidebar';
 import SideBarView from "./components/layouts/SideBar/SideBarView";
+import Register from "./components/pages/userOperations/register/Register";
 
 function App() {
 
     const navigate = useNavigate();
     const [auth, setAuth] = useState(false);
     const [accountType, setAccountType] = useState("")
+
 
     function handleLogout() {
         localStorage.removeItem('user');
@@ -26,7 +28,7 @@ function App() {
         navigate("/login")
     }
 
-    const data = {auth, setAuth, handleLogout};
+    const data = {auth, setAuth, accountType ,handleLogout};
 
     useEffect(() => {
         let user = localStorage.getItem("user");
@@ -50,6 +52,7 @@ function App() {
                         <Routes>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/profile" element={<Profile/>}/>
+                            <Route path="/register" element={<Register/>}/>
                             <Route path="/" element={<MainPage/>}/>
                         </Routes>
                     </div>

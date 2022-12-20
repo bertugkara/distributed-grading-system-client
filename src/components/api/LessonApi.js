@@ -1,7 +1,6 @@
 import axios from './axios'
 import authHeader from "./TokenHandler";
 
-const CREATE_LESSON_URL = "/class/add";
 const GET_LESSONS_URL="/class/getAll"
 export async function getAllClasses(){
     return await axios
@@ -22,6 +21,35 @@ export async function getAllExpertAndTeacherAndStudentDTO(){
                 Authorization: authHeader(),
             },
         });
+}
+
+const CREATE_LESSON_URL = "/class/add";
+export async function handleSubmitCreateLesson(
+    name,
+    description,
+    lessonCode,
+    instructor,
+    expertList,
+    studentList
+) {
+    return await axios
+        .post(
+            CREATE_LESSON_URL,
+            JSON.stringify({
+                name,
+                description,
+                lessonCode,
+                instructor,
+                expertList,
+                studentList,
+            }),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: authHeader(),
+                },
+            }
+        )
 
 }
 

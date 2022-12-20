@@ -12,13 +12,15 @@ import './App.css'
 import {ProSidebarProvider} from 'react-pro-sidebar';
 import SideBarView from "./components/layouts/SideBar/SideBarView";
 import Register from "./components/pages/userOperations/register/Register";
+import CreateClass from "./components/pages/class/classActions/CreateClass";
+import RegisterExpertTeacherExclusive from "./components/pages/userOperations/register/RegisterExpertTeacherExclusive";
 
 function App() {
 
     const navigate = useNavigate();
     const [auth, setAuth] = useState(false);
     const [accountType, setAccountType] = useState("")
-
+    const [loggedInTrigger, setLoggedInTrigger]=useState(false)
 
     function handleLogout() {
         localStorage.removeItem('user');
@@ -28,7 +30,7 @@ function App() {
         navigate("/login")
     }
 
-    const data = {auth, setAuth, accountType ,handleLogout};
+    const data = {auth, setAuth, accountType ,handleLogout, loggedInTrigger, setLoggedInTrigger};
 
     useEffect(() => {
         let user = localStorage.getItem("user");
@@ -40,6 +42,10 @@ function App() {
             navigate("/login");
         }
     }, []);
+
+    useEffect(() => {
+        setAccountType(localStorage.getItem("accountType"));
+    },[loggedInTrigger])
 
     return (<div className={"App"}>
             <AuthenticationContext.Provider value={data}>
@@ -53,6 +59,8 @@ function App() {
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/profile" element={<Profile/>}/>
                             <Route path="/register" element={<Register/>}/>
+                            <Route exact path="/registerExpertTeacherExclusive" element={<RegisterExpertTeacherExclusive/>}/>
+                            <Route path="/createClass" element={<CreateClass/>}/>
                             <Route path="/" element={<MainPage/>}/>
                         </Routes>
                     </div>

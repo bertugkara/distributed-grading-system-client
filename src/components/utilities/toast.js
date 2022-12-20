@@ -23,7 +23,7 @@ export default function toastError(errMsg) {
         progress: undefined,
       });
   }
-  export function toastLoginWarning(){
+  export function toastLoginWarning() {
       toast.warning("You Are Already On Page Login", {
           position: "top-right",
           autoClose: 4000,
@@ -33,4 +33,16 @@ export default function toastError(errMsg) {
           draggable: true,
           progress: undefined,
       });
+  }
+
+      export function toastWarning(message){
+          toast.warning(message, {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+          });
   }

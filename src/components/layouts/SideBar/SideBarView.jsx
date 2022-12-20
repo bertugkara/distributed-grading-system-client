@@ -15,16 +15,18 @@ export default function SideBarView() {
     return (<div style={{display: 'flex', height: '100%', color: "inherit"}}>
         <Sidebar rootStyles={{
             [`.${sidebarClasses.container}`]: {
-                marginTop: 60,
+                marginTop: 65,
                 marginLeft: -15,
             },
         }}>
             <Menu>
                 <MenuItem> Homeworks </MenuItem>
                 <MenuItem> Homework Submissions </MenuItem>
+                {accountType === "TEACHER" ? <MenuItem onClick={() => handleNavigate("/registerExpertTeacherExclusive")}> Register Expert </MenuItem> : null}
+                {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/createClass")}> Create Class </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/register")}> Register User </MenuItem> : null}
                 <SubMenu label="Home">
-                    <MenuItem> Home </MenuItem>
+                    <MenuItem onClick={() => handleNavigate("/")}> Home </MenuItem>
                     <MenuItem> Classes </MenuItem>
                 </SubMenu>
             </Menu>

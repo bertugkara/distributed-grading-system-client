@@ -1,14 +1,12 @@
-import AuthenticationContext from "../../../context/AuthenticationContext";
 import {useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import toastError, {toastSuccess} from "../../../utilities/toast";
-import Box from "@mui/material/Box";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import RegisterView from "./RegisterView";
-import './Register.css'
+import {useNavigate} from "react-router-dom";
+import AuthenticationContext from "../../../context/AuthenticationContext";
 import {sendRegisterUserRequest} from "../../../api/RegisterApi";
+import RegisterView from "./RegisterView";
 
-export default function Register() {
+
+export default function RegisterExpertTeacherExclusive(){
 
     const navigate = useNavigate();
     const {auth, accountType} = useContext(AuthenticationContext);
@@ -18,7 +16,8 @@ export default function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [registerLink, setRegisterLink] = useState(``);
-    const [registerType, setRegisterType] = useState("STUDENT");
+    const [registerType, setRegisterType] = useState("EXPERT");
+    const [user]=useState(JSON.parse(localStorage.getItem("user")));
 
     async function sendRegisterRequest() {
         await sendRegisterUserRequest(registerLink,
@@ -27,6 +26,7 @@ export default function Register() {
             firstName,
             lastName,
             password,
+            user.roles.includes("TEACHER") ? user.id : null
         ).then((response) => {
             if (response.data.success == true) {
                 toastSuccess("Successfull Registration")
@@ -35,46 +35,26 @@ export default function Register() {
             }
         })
     }
+
     useEffect(() => {
         if (auth !== true) {
             navigate("/login")
         }
-        else if (accountType !== "ADMIN") {
+        if (accountType ==="TEACHER"){
+            setRegisterType("EXPERT")
+            setRegisterLink(`expert/add`);
+        }
+        else if (accountType !== "TEACHER") {
             toastError("You have to be admin to access this page!")
             navigate("/")
         }
 
-        setRegisterLink(`${registerType.toLowerCase()}/add`);
+        setRegisterLink(`expert/add`);
     }, []);
-
-    const handleChange = (event) => {
-        setRegisterType(event.target.value);
-        setRegisterLink(`${event.target.value.toLowerCase()}/add`);
-    };
 
 
     return <div>
-        <div className="register-div">
-            What Type you want to Register:
-            <Box sx={{minWidth: 120}}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={registerType}
-                        defaultValue="STUDENT"
-                        label="Types"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="STUDENT">Student</MenuItem>
-                        <MenuItem value="TEACHER">Teacher</MenuItem>
-                        <MenuItem value="EXPERT">Expert</MenuItem>
-                        <MenuItem value="ADMIN">Admin</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-        </div>
+
         <div className="register">
             {<RegisterView setEmail={setEmail}
                            email={email}
@@ -92,7 +72,7 @@ export default function Register() {
                            username={username}
 
                            sendRequest={sendRegisterRequest}
-                           registerType={registerType}
+                           registerType={"EXPERT"}
             />}
         </div>
     </div>

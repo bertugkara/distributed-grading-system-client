@@ -9,14 +9,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-
 const theme = createTheme();
 export default function RegisterView(props) {
 
-
     useEffect(() => {
         props.setPassword(generatePassword());
-    }, []);
+    }, [props.registerType]);
 
     return <div>
         <ThemeProvider theme={theme}>
@@ -27,7 +25,7 @@ export default function RegisterView(props) {
                         marginTop: 3,
                         display: 'flex',
                         flexDirection: 'column',
-                        border:'black',
+                        border: 'black',
                         alignItems: 'center',
                     }}
                 >
@@ -35,7 +33,9 @@ export default function RegisterView(props) {
                     <Typography component="h1" variant="h5">
                         Register {props.registerType}
                     </Typography>
-
+                    <Typography component="h5" variant="h7">
+                        {props.registerType === "TEACHER" ? "Remember, Creating Teacher Will Create Expert As Well!" : null}
+                    </Typography>
                     <Box component="form" noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
@@ -50,18 +50,31 @@ export default function RegisterView(props) {
                             }}
                             autoFocus
                         />
+
                         <TextField
                             margin="normal"
                             required
                             fullWidth
+                            id="email"
+                            label="email"
+                            name="email"
+                            autoComplete="email"
+                            onChange={(e) => {
+                                props.setEmail(e.target.value)
+                            }}
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            disabled={true}
                             name="password"
-                            label="Password"
+                            label={"Password: " + props.password}
                             type="password"
                             id="password"
+                            contentEditable={false}
                             autoComplete="current-password"
-                            onChange={(e) => {
-                                props.setPassword(e.target.value)
-                            }}
                         />
 
                         <TextField

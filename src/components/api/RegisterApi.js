@@ -5,6 +5,7 @@ export async function sendRegisterUserRequest(RegisterUrl, email,
                                    username, firstName,
                                    lastName,
                                    password,
+                                   referencedTeacherID
                                    ) {
     return await axios
         .post(
@@ -15,6 +16,7 @@ export async function sendRegisterUserRequest(RegisterUrl, email,
                 firstName,
                 lastName,
                 password,
+                referencedTeacherID
             }),
             {
                 headers: {

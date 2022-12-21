@@ -50,6 +50,16 @@ export async function handleSubmitCreateLesson(
                 },
             }
         )
-
 }
+
+export async function getClassInfo(id) {
+    const GET_ONE_CLASS_URL = `/class/getOne/${id}` ;
+    return await axios.get(GET_ONE_CLASS_URL, {
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': authHeader()
+        }
+    });
+}
+
 

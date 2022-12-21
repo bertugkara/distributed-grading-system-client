@@ -5,7 +5,7 @@
 .App{
     display: flex;
     width: 100%;
-    height: 110vh;
+    height: 125vh;
     background-color: #ffede3 ;
     
 }
@@ -18,7 +18,7 @@
 }
 
 .components {
-    margin-top: 10%;
+    margin-top: 5%;
     display: block;
     margin-left: auto;
     margin-right: auto;

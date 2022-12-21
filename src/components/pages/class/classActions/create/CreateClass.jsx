@@ -1,8 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import AuthenticationContext from "../../../context/AuthenticationContext";
-import toastError, {toastSuccess, toastWarning} from "../../../utilities/toast";
-import {getAllExpertAndTeacherAndStudentDTO, handleSubmitCreateLesson} from "../../../api/LessonApi";
+import AuthenticationContext from "../../../../context/AuthenticationContext";
+import toastError, {toastSuccess, toastWarning} from "../../../../utilities/toast";
+import {getAllExpertAndTeacherAndStudentDTO, handleSubmitCreateLesson} from "../../../../api/LessonApi";
 import CreateClassView from "./CreateClassView";
 
 export default function CreateClass() {
@@ -28,12 +28,7 @@ export default function CreateClass() {
     }
 
     async function callSubmit(selectedInstructorList, selectedExpertList, selectedStudentList) {
-        console.log(name,
-            description,
-            lessonCode,
-            selectedInstructorList,
-            selectedExpertList,
-            selectedStudentList)
+
         await handleSubmitCreateLesson(
             name,
             description,
@@ -42,10 +37,10 @@ export default function CreateClass() {
             selectedExpertList,
             selectedStudentList
         ).then((response) => {
-            if (response.data.success==true) {
+            if (response.data.success == true) {
                 toastSuccess("Successfully added");
             }
-            if (response.data.success==false) {
+            if (response.data.success == false) {
                 toastWarning(response.data.message);
             }
         }).catch((err) => {

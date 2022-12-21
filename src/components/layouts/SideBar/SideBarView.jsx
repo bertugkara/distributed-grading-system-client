@@ -25,9 +25,10 @@ export default function SideBarView() {
                 {accountType === "TEACHER" ? <MenuItem onClick={() => handleNavigate("/registerExpertTeacherExclusive")}> Register Expert </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/createClass")}> Create Class </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/register")}> Register User </MenuItem> : null}
+                {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/users")}> Users </MenuItem> : null}
                 <SubMenu label="Home">
                     <MenuItem onClick={() => handleNavigate("/")}> Home </MenuItem>
-                    <MenuItem> Classes </MenuItem>
+                    <MenuItem onClick={() => handleNavigate("/class")}> Classes </MenuItem>
                 </SubMenu>
             </Menu>
         </Sidebar>

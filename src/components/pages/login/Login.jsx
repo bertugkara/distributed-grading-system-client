@@ -7,7 +7,7 @@ import {SendPostLoginRequest} from "../../api/LoginApi";
 export default function Login() {
 
     const navigate = useNavigate();
-    const {auth, setAuth} =
+    const {auth, setAuth, setLoggedInTrigger} =
         useContext(AuthenticationContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -47,6 +47,7 @@ export default function Login() {
                 SetUserLogin(response);
                 setSuccess(true);
                 toastSuccess("Success Login");
+                setLoggedInTrigger(true);
                 navigateToMain();
             } else {
                 toastError("Failed to Login.");

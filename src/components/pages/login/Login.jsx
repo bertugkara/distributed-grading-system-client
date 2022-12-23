@@ -4,7 +4,7 @@ import AuthenticationContext from "../../context/AuthenticationContext";
 import LoginView from "./LoginView";
 import toastError, {toastSuccess} from "../../utilities/toast";
 import {SendPostLoginRequest} from "../../api/LoginApi";
-export default function Login() {
+export default function Login(props) {
 
     const navigate = useNavigate();
     const {auth, setAuth, setLoggedInTrigger} =
@@ -33,7 +33,7 @@ export default function Login() {
 
     function SetUserLogin(response){
         localStorage.setItem("user", JSON.stringify(response?.data) );
-        localStorage.setItem("accountType", response.data.roles[0]);
+        localStorage.setItem("accountType", response.data.roles);
         localStorage.setItem("token", JSON.stringify(response.data.token));
         setAuth(true);
     }
@@ -48,6 +48,7 @@ export default function Login() {
                 setSuccess(true);
                 toastSuccess("Success Login");
                 setLoggedInTrigger(true);
+                props.setAccountType(localStorage.getItem("accountType"))
                 navigateToMain();
             } else {
                 toastError("Failed to Login.");

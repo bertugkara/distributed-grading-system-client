@@ -18,6 +18,9 @@ import UserList from "./components/pages/userlist/UserList";
 import ClassList from "./components/pages/class/classList/ClassList";
 import ClassEdit from "./components/pages/class/classActions/edit/ClassEdit";
 import ClassPage from "./components/pages/class/classpage/ClassPage";
+import {AddHomeWork} from "@mui/icons-material";
+import AddHomework from "./components/pages/homework/homeworkactions/AddHomework";
+import HomeworkSubmission from "./components/pages/homework/homeworksubmission/HomeworkSubmission";
 
 function App() {
 
@@ -31,6 +34,7 @@ function App() {
         localStorage.removeItem('token');
         localStorage.removeItem('accountType');
         setAuth(false);
+        setAccountType(null)
         navigate("/login")
     }
 
@@ -60,7 +64,7 @@ function App() {
                     </div>
                     <div className={"components"}>
                         <Routes>
-                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/login" element={<Login setAccountType={setAccountType}/>}/>
                             <Route exact path="/profile" element={<Profile/>}/>
                             <Route exact path="/register" element={<Register/>}/>
                             <Route path="/users" element={<UserList/>}/>
@@ -70,6 +74,8 @@ function App() {
                             <Route exact path="/class" element={<ClassList/>}/>
                             <Route exact path="/class/view/:id" element={<ClassPage/>}/>
                             <Route exact path="/class/edit/:id" element={<ClassEdit/>}/>
+                            <Route exact path="/homework/addToClass/:id" element={<AddHomework/>}/>
+                            <Route exact path="/homework/addSubmissionToId/:id" element={<HomeworkSubmission/>}/>
                         </Routes>
                     </div>
                     <ToastContainer/>

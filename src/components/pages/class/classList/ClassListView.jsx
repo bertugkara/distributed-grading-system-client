@@ -4,12 +4,17 @@ import Box from "@mui/material/Box";
 
 export default function ClassListView(props) {
 
+    function isEditButtonVisible(){
+        if(props.accountType == "ADMIN") return true
+        else return false;
+    }
+
     const columns = [
         {field: 'id', headerName: 'ID', width: 120},
         {field: 'name', headerName: 'Name', width: 175},
         {field: 'lessonCode', headerName: 'Lesson Code', width: 175},
         {
-            field: "Lesson Page",
+            field: "Lesson Page", headerName: "Lesson Page",
             renderCell: (cellValues) => {
                 return (
                     <Button className={"lessonPage-button"}
@@ -30,6 +35,7 @@ export default function ClassListView(props) {
                 return (
                     <Button className={"Edit-Button"}
                             variant="contained"
+                            disabled={isEditButtonVisible}
                             onClick={() => {
                                 props.handleEditButton(cellValues.id)
                             }}

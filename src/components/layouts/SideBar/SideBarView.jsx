@@ -20,7 +20,6 @@ export default function SideBarView() {
             },
         }}>
             <Menu>
-                <MenuItem> Homeworks </MenuItem>
                 <MenuItem> Homework Submissions </MenuItem>
                 {accountType === "TEACHER" ? <MenuItem onClick={() => handleNavigate("/registerExpertTeacherExclusive")}> Register Expert </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/createClass")}> Create Class </MenuItem> : null}

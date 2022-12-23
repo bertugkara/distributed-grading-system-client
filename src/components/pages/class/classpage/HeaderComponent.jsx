@@ -5,8 +5,9 @@ import Button from "@mui/material/Button";
 
 
 export default function HeaderComponent(props){
-    const {post, addHomework, accountType} = props;
-
+    const {post, addHomework, accountType, classID} = props;
+    console.log(accountType)
+    console.log(JSON.parse(localStorage.getItem("user")))
     return (
         <Paper
             sx={{
@@ -68,9 +69,9 @@ export default function HeaderComponent(props){
                             Lesson Actions:
                             <br></br>
 
-                            { accountType == "ADMIN" || accountType == "TEACHER" ?
+                            { accountType.includes("ADMIN") || accountType.includes("TEACHER") ?
                                 <Button className={"lesson-action-buttons"} onClick={() => {
-                                    addHomework()
+                                    addHomework(classID)
                                 }}>Add Homework</Button> : null
                             }
 

@@ -31,6 +31,10 @@ export default function ClassPage(){
         else fetchClassInfo(id)
     },[])
 
+    function handleAddHomeworkButton(id) {
+        navigate(`/homework/addToClass/${id}`)
+    }
+
     function isClassInfoFullFilled(){
         if(classInfo !== undefined){
             return true;
@@ -41,7 +45,7 @@ export default function ClassPage(){
 
     return <div>
         { isClassInfoFullFilled() === true ?
-            <ClassPageView classInfo={classInfo} accountType={accountType}/> : null
+            <ClassPageView classInfo={classInfo} accountType={accountType} handleAddHomework={handleAddHomeworkButton}/> : null
         }
     </div>
 }

@@ -3,7 +3,7 @@ import {Grid, Paper} from "@mui/material";
 import Box from "@mui/material/Box";
 
 export default function HeaderComponent(props) {
-    const {post} = props;
+    const {post, accountType} = props;
 
     return (
         <Paper
@@ -49,7 +49,7 @@ export default function HeaderComponent(props) {
                             Your E-mail:  {post.description}
                         </Typography>
                         <Typography variant="h6" color="inherit" paragraph>
-                            You are Student
+                            You are {accountType}
                         </Typography>
                     </Box>
                 </Grid>

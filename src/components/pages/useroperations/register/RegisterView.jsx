@@ -16,6 +16,7 @@ export default function RegisterView(props) {
         props.setPassword(generatePassword());
     }, [props.registerType]);
 
+
     return <div>
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">

@@ -12,15 +12,16 @@ import './App.css'
 import {ProSidebarProvider} from 'react-pro-sidebar';
 import SideBarView from "./components/layouts/SideBar/SideBarView";
 import Register from "./components/pages/useroperations/register/Register";
-import CreateClass from "./components/pages/class/classActions/create/CreateClass";
+import CreateClass from "./components/pages/class/classactions/create/CreateClass";
 import RegisterExpertTeacherExclusive from "./components/pages/useroperations/register/RegisterExpertTeacherExclusive";
 import UserList from "./components/pages/userlist/UserList";
-import ClassList from "./components/pages/class/classList/ClassList";
-import ClassEdit from "./components/pages/class/classActions/edit/ClassEdit";
+import ClassList from "./components/pages/class/classlist/ClassList";
+import ClassEdit from "./components/pages/class/classactions/edit/ClassEdit";
 import ClassPage from "./components/pages/class/classpage/ClassPage";
 import {AddHomeWork} from "@mui/icons-material";
 import AddHomework from "./components/pages/homework/homeworkactions/AddHomework";
 import HomeworkSubmission from "./components/pages/homework/homeworksubmission/HomeworkSubmission";
+import HomeworkSubmissionList from "./components/pages/homework/homeworksubmissiongrade/list/HomeworkSubmissionList";
 
 function App() {
 
@@ -76,6 +77,7 @@ function App() {
                             <Route exact path="/class/edit/:id" element={<ClassEdit/>}/>
                             <Route exact path="/homework/addToClass/:id" element={<AddHomework/>}/>
                             <Route exact path="/homework/addSubmissionToId/:id" element={<HomeworkSubmission/>}/>
+                            <Route exact path="/class/homeworkSubmissions/grade/:classID" element={<HomeworkSubmissionList/>}/>
                         </Routes>
                     </div>
                     <ToastContainer/>

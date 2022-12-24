@@ -18,7 +18,7 @@ export default function HomeworkSubmission(){
 
     console.log(selectedFile)
     function handleUpload(){
-        console.log("girdi")
+
 
         let myForm= new FormData();
         myForm.append("request", new Blob([JSON.stringify({
@@ -41,7 +41,7 @@ export default function HomeworkSubmission(){
                 setResponse(response.data.data)
             }
             else {
-                toastError("Error Occured");
+                toastError(response.data.message);
                 setProgress(0)
             }
         });

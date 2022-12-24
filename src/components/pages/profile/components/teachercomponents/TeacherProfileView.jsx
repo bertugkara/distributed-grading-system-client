@@ -1,16 +1,20 @@
+import HeaderComponent from "../HeaderComponent";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import StudentFeaturedProfilePostLessons from "../studentcomponents/StudentFeaturedProfilePostLessons";
+import StudentFeaturedHomeworkPost from "../studentcomponents/StudentFeaturedHomeworkPost";
+import StudentFeaturedHomeworkSubmission from "../studentcomponents/StudentFeaturedHomeworkSubmission";
 import React from "react";
-import StudentFeaturedProfilePostLessons from "./StudentFeaturedProfilePostLessons";
-import StudentFeaturedHomeworkSubmission from "./StudentFeaturedHomeworkSubmission";
-import StudentFeaturedHomeworkPost from "./StudentFeaturedHomeworkPost";
-import "../../Profile.css"
-import HeaderComponent from "../HeaderComponent";
+import TeacherFeaturedProfilePostLesson from "./TeacherFeaturedProfilePostLessons";
+import TeacherFeaturedHomeworkPost from "./TeacherFeaturedHomeworkPost";
+import TeacherFeaturedHomeworkSubmissionObjection from "./TeacherFeaturedHomeworkSubmissionObjection";
 
-export default function StudentProfileView(props) {
+
+export default function TeacherProfileView(props) {
 
     const {data, mainFeaturedPost, accountType} = props;
+    console.log(data)
     return (
         <div>
             <div className={"lesson-page"}>
@@ -19,10 +23,10 @@ export default function StudentProfileView(props) {
                     <Grid container>
                         {data.classList != null && data.classList.length > 0 ?
                             <Grid item md={4}>
-                                Lessons You are Responsible:
+                                Lessons You are Attending:
                                 <Box>
                                     {data.classList.map((lesson) => (
-                                        <StudentFeaturedProfilePostLessons key={lesson.id} post={lesson}/>
+                                        <TeacherFeaturedProfilePostLesson key={lesson.id} post={lesson}/>
                                     ))}
                                 </Box>
                             </Grid> :
@@ -31,37 +35,37 @@ export default function StudentProfileView(props) {
                             </Grid>
                         }
 
-                        {data.responsibleHomeworkList != null && data.responsibleHomeworkList.length > 0 ?
+                        {data.createdHomeworkList != null && data.createdHomeworkList.length > 0 ?
                             <Grid item md={4} className={"Homeworks-grid"}>
                                 Homeworks:
                                 <Box>
-                                    {data.responsibleHomeworkList.map((tempHomework) => (
-                                        <StudentFeaturedHomeworkPost key={tempHomework.id} post={tempHomework}
+                                    {data.createdHomeworkList.map((tempHomework) => (
+                                        <TeacherFeaturedHomeworkPost key={tempHomework.id} post={tempHomework}
                                         />
                                     ))}
                                 </Box>
                             </Grid> :
                             <Grid item md={4}>
-                                <div><label> No homework assigned to you, yet! </label></div>
+                                <div><label> You have not created any Homework </label></div>
                             </Grid>
 
                         }
 
-                        {data.submissionList != null && data.submissionList.length > 0 ?
+                        {data.homeworkSubmissionPerformedObjection != null && data.homeworkSubmissionPerformedObjection.length > 0 ?
                             <Grid item md={4} className={"Homeworks-submission-grid"}>
                                 Homework Submissions:
                                 <Box>
-                                    {data.submissionList
+                                    {data.homeworkSubmissionPerformedObjection
                                         .map((tempHomework) => (
-                                            <StudentFeaturedHomeworkSubmission key={tempHomework.id}
-                                                                               post={tempHomework}
+                                            <TeacherFeaturedHomeworkSubmissionObjection key={tempHomework.id}
+                                                                                        post={tempHomework}
                                             />
                                         ))}
                                 </Box>
                             </Grid> :
 
                             <Grid item md={4}>
-                                <div>You have not send any homework submission</div>
+                                <div>No objection performed</div>
                             </Grid>
                         }
                     </Grid>

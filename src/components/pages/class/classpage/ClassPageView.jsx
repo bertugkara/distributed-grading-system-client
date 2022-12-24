@@ -20,7 +20,12 @@ export default function ClassPageView(props) {
 
     return <div>
         <div className={"lesson-page"}>
-            <HeaderComponent post={mainFeaturedPost} addHomework={props.handleAddHomework} classID={props.classInfo.id} accountType={accountType}/>
+            <HeaderComponent post={mainFeaturedPost}
+                             addHomework={props.handleAddHomework}
+                             classID={props.classInfo.id}
+                             accountType={accountType}
+                             listAllSubmissions={props.handleListAllSubmissionsButton}
+            />
             <Container maxWidth="bg">
                 <Grid container>
 

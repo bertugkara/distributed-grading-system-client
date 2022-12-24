@@ -4,18 +4,20 @@ import {useNavigate} from "react-router-dom";
 import {getAllClasses} from "../../../api/LessonApi";
 import toastError, {toastWarning} from "../../../utilities/toast";
 import ClassListView from "./ClassListView";
+import {RefreshRounded} from "@mui/icons-material";
 
 export default function ClassList() {
 
     const navigate = useNavigate();
     const {auth, accountType} = useContext(AuthenticationContext);
     const [lessons, setLessons] = useState([]);
+    const [refresh, setRefresh]= useState(0);
 
     function getAllLessons() {
         getAllClasses().then((response) => {
             if (response.data.success == true) setLessons(response.data.data);
             else toastError("Fetching Error")
-        })
+        });
     }
 
     function handleEditButton(lessonID) {
@@ -35,12 +37,25 @@ export default function ClassList() {
         }
     }, [])
 
+    function isLessonsValid(lessons){
+        if( lessons === []) return false;
+        else return true;
+    }
+
+    function getAllLessonsWithTimer(){
+
+        setTimeout(()=>{
+            getAllLessons()
+        },500);
+    }
+
     return <div>
         {
-            <ClassListView accountType={accountType} lessons={lessons}
-                           handleLessonPageButton={handleLessonPageButton}
-                           handleEditButton={handleEditButton}
-            />
+                isLessonsValid() ?
+                    <ClassListView accountType={accountType} lessons={lessons}
+                                   handleLessonPageButton={handleLessonPageButton}
+                                   handleEditButton={handleEditButton}
+                    /> : <RefreshRounded onClick={getAllLessonsWithTimer}/>
         }
     </div>
 }

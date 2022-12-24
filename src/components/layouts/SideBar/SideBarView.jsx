@@ -21,7 +21,7 @@ export default function SideBarView() {
         }}>
             <Menu>
                 <MenuItem> Homework Submissions </MenuItem>
-                {accountType === "TEACHER" ? <MenuItem onClick={() => handleNavigate("/registerExpertTeacherExclusive")}> Register Expert </MenuItem> : null}
+                { accountType.includes("TEACHER") && accountType.includes("EXPERT") ? <MenuItem onClick={() => handleNavigate("/registerExpertTeacherExclusive")}> Register Expert </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/createClass")}> Create Class </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/register")}> Register User </MenuItem> : null}
                 {accountType === "ADMIN" ? <MenuItem onClick={() => handleNavigate("/users")}> Users </MenuItem> : null}

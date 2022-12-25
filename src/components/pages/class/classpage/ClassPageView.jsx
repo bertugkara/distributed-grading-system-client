@@ -5,10 +5,12 @@ import Box from "@mui/material/Box";
 import ExpertInformationCard from "./card/ExpertInformationCard";
 import StudentCard from "./card/StudentCard";
 import TeacherCard from "./card/TeacherCard";
+import {useNavigate} from "react-router-dom";
 
 export default function ClassPageView(props) {
 
-    const {classInfo, accountType} = props
+    const {classInfo, accountType } = props
+    const navigate = useNavigate();
 
     const mainFeaturedPost = {
         title: classInfo.name,
@@ -16,15 +18,14 @@ export default function ClassPageView(props) {
         lessonCode: classInfo.lessonCode
     };
 
-    function handleAddHomework() {
-
-    }
-
-    console.log(classInfo)
-
     return <div>
         <div className={"lesson-page"}>
-            <HeaderComponent post={mainFeaturedPost} addHomework={handleAddHomework} accountType={accountType}/>
+            <HeaderComponent post={mainFeaturedPost}
+                             addHomework={props.handleAddHomework}
+                             classID={props.classInfo.id}
+                             accountType={accountType}
+                             listAllSubmissions={props.handleListAllSubmissionsButton}
+            />
             <Container maxWidth="bg">
                 <Grid container>
 

@@ -4,9 +4,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 
-export default function HeaderComponent(props){
-    const {post, addHomework, accountType} = props;
-
+export default function HeaderComponent(props) {
+    const {post, addHomework, accountType, classID,listAllSubmissions} = props;
     return (
         <Paper
             sx={{
@@ -14,8 +13,8 @@ export default function HeaderComponent(props){
                 backgroundColor: 'grey.800',
                 color: '#fff',
                 mb: 6,
-                minWidth:1200,
-                maxWidth:1250,
+                minWidth: 1200,
+                maxWidth: 1250,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
@@ -32,7 +31,7 @@ export default function HeaderComponent(props){
                 }}
             />
 
-            <Grid container >
+            <Grid container>
 
                 <Grid item md={8}>
                     <Box
@@ -68,16 +67,15 @@ export default function HeaderComponent(props){
                             Lesson Actions:
                             <br></br>
 
-                            { accountType == "ADMIN" || accountType == "TEACHER" ?
+                            {accountType.includes("ADMIN") || accountType.includes("TEACHER") ?
                                 <Button className={"lesson-action-buttons"} onClick={() => {
-                                    addHomework()
+                                    addHomework(classID)
                                 }}>Add Homework</Button> : null
                             }
 
                             <br></br>
-                            <Button className={"lesson-action-buttons"} >
+                            <Button onClick={() => listAllSubmissions(classID)} className={"lesson-action-buttons"}>
                                 List All Homework Submissions</Button>
-
                         </Typography>
                     </Box>
                 </Grid>

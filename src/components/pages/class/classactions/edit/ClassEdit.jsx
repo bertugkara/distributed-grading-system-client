@@ -81,5 +81,5 @@ export default function ClassEdit() {
     }
 
     return <div><Button onClick={() => setRefresher(refresher + 1)}> <RefreshRounded/></Button>
-        {isValidToRender() ? getComponent() : null} </div>
+        {isValidToRender() ? getComponent() : isValidToRender() } </div>
 }

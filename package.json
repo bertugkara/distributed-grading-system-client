@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.1",
     "@mui/styled-engine-sc": "^5.11.0",
@@ -16,6 +17,8 @@
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
+    "react-dates": "^21.8.0",
+    "react-datetime-picker": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-pro-sidebar": "^1.0.0-alpha.9",

@@ -7,6 +7,7 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import RegisterView from "./RegisterView";
 import './Register.css'
 import {sendRegisterUserRequest} from "../../../api/RegisterApi";
+import generatePassword from "../generateRandomPassword";
 
 export default function Register() {
 

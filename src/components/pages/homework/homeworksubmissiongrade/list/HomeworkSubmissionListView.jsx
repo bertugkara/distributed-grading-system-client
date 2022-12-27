@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import './HomeworkSubmissionList.css'
 import {seeFile} from "../../../../api/HomeworkApi";
 import Button from "@mui/material/Button";
-import OpenDialog from "./OpenDialog";
+import OpenDialogStudentSubmission from "./OpenDialogStudentSubmission";
 import {DataGrid} from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import {useState} from "react";
@@ -96,10 +96,10 @@ export default function HomeworkSubmissionListView(props) {
                         />
                     </Box>
                 </div>
-                : <OpenDialog setOpen={setOpen} open={open} handleCloseAndSave={handleCloseAndSave}
-                              handleClickOpen={handleClickOpen} handleClose={handleClose}
-                              grade={props.grade} setGrade={props.setGrade}
-
+                : <OpenDialogStudentSubmission setOpen={setOpen} open={open} handleCloseAndSave={handleCloseAndSave}
+                                               handleClickOpen={handleClickOpen} handleClose={handleClose}
+                                               grade={props.grade} setGrade={props.setGrade}
+                                               comment={props.comment} setComment={props.setComment}
                 />
         }
     </div>

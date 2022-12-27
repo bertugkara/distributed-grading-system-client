@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import {FormControl, InputLabel, MenuItem, OutlinedInput, Select} from "@mui/material";
 import Button from "@mui/material/Button";
-import {getAllExpertAndTeacherAndStudentDTO} from "../../../../api/LessonApi";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,75 +17,34 @@ const MenuProps = {
 
 export default function ClassEditView(props) {
 
-    const [tempTeacher, setTempTeacher] = useState([]); // Instructor to sent
-    const [tempExpert, setTempExpert] = useState([]); // experts to sent
-    const [tempStudent, setTempStudent] = useState([]); // students to sent
-    const [reRender, setReRender] = useState(0)
-
+    const {tempStudentList,setTempStudentList,tempExpertList,setTempExpertList,tempTeacherList,setTempTeacherList} = props
+    console.log(tempStudentList,tempExpertList,tempTeacherList)
     const handleChangeTeacher = (event) => {
         const {
             target: {value},
         } = event;
-        setTempTeacher(value);
+        setTempTeacherList(value);
     };
     const handleChangeExpert = (event) => {
         const {
             target: {value},
         } = event;
-        setTempExpert(value);
+        setTempExpertList(value);
     };
 
     const handleChangeStudent = (event) => {
         const {
             target: {value},
         } = event;
-        setTempStudent(value);
+        setTempStudentList(value);
     };
 
-    function reRenderer() {
-        setReRender(reRender + 1)
-        props.isValidToRender()
-    }
-
-    function performCopyArrays() {
-
-        let studentData = [];
-        if (props.class.studentList == undefined) {
-            reRenderer()
-        } else {
-            props.class.studentList.map((temp) => {
-                studentData.push(temp.id)
-            });
-            setTempStudent([...studentData]);
-        }
-
-        let expertData = [];
-        if (props.class.studentList == undefined) {
-            reRenderer()
-        } else {
-            props.class.expertList.map((tempAss) => {
-                return expertData.push(tempAss.id)
-            });
-            setTempExpert([...expertData])
-        }
-
-        if (props.class.instructor != undefined) setTempTeacher(props.class.instructor.id)
-    }
-
-
-    useEffect(() => {
-            props.setDescription(props.class.description)
-            props.setName(props.class.name)
-            props.setLessonCode(props.class.lessonCode)
-            performCopyArrays();
-        }, []
-    )
-
     function sendEditRequest() {
-        props.sendEditRequest(tempTeacher, tempExpert, tempStudent)
+        props.sendEditRequest();
     }
 
     return <div className={"adminEditLesson"}>
+
         <div>
             <Box className={"edit-box"}
                  component="form"
@@ -141,7 +99,7 @@ export default function ClassEditView(props) {
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={tempTeacher}
+                value={tempTeacherList}
                 onChange={handleChangeTeacher}
                 label="Teacher"
             >
@@ -160,7 +118,7 @@ export default function ClassEditView(props) {
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"
                     multiple
-                    value={tempExpert}
+                    value={tempExpertList}
                     onChange={handleChangeExpert}
                     input={<OutlinedInput label="Experts"/>}
                     MenuProps={MenuProps}
@@ -181,7 +139,7 @@ export default function ClassEditView(props) {
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"
                     multiple
-                    value={tempStudent}
+                    value={tempStudentList}
                     onChange={handleChangeStudent}
                     input={<OutlinedInput label="Students"/>}
                     MenuProps={MenuProps}

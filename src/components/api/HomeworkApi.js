@@ -79,7 +79,6 @@ export async function getSubmissionsWithClassId(id) {
 }
 
 const SUBMIT_GRADE_URL = "grade/gradeSubmission"
-
 export async function submitGrading(
     studentID, submissionID, grade
 ) {
@@ -101,6 +100,7 @@ export async function submitGrading(
         )
 }
 
+
 const PERFORM_OBJECTION_URL = "grade/performObjection"
 
 export async function performObjection(gradeSubmissionId, userPerformedObjectionId) {
@@ -118,8 +118,7 @@ export async function performObjection(gradeSubmissionId, userPerformedObjection
         .post(PERFORM_OBJECTION_URL, null, config);
 }
 
-const SEND_GRADE_UPDATE_URL = "grade/updateSubmissionTeacher"
-
+const SEND_GRADE_UPDATE_URL = "grade/updateSubmissionExpert"
 export async function updateGradeFromTeacher(
     teacherID, submissionID, grade
 ) {

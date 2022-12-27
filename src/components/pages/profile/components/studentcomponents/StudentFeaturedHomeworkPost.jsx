@@ -16,7 +16,11 @@ export default function StudentFeaturedHomeworkPost(props) {
     function handleNavigate() {
         navigate(`/homework/addSubmissionToId/${post.id}`)
     }
-    console.log(post)
+
+    function isAlreadySubmitted(){
+
+    }
+
     return (
         <Grid item xs={10} md={15}>
                 <Card sx={{display: 'flex'}}>

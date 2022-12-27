@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {
     performObjection,
     redirectToExpert,
@@ -14,17 +14,15 @@ import Button from "@mui/material/Button";
 import {SearchRounded, Warning} from "@mui/icons-material";
 import CardActions from "@mui/material/CardActions";
 import OpenDialogStudentSubmission from "../../../homework/homeworksubmissiongrade/list/OpenDialogStudentSubmission";
-import {getCommentsByHomeworkSubmissionId} from "../../../../api/CommentsApi";
 
 
-export default function TeacherFeaturedHomeworkSubmissionObjection(props) {
+export default function ExpertFeaturedHomeworkObjectionSubmissionPost(props) {
 
-    const {post, accountType} = props;
+    const {post} = props;
     const [Url] = useState(post.fileDTO.url)
     const [grade, setGrade] = useState(0);
     const [open, setOpen] = useState(false);
     const [currentSubmissionID, setCurrentSubmissionId] = useState(null);
-    const [comment, setComment] = useState(null)
 
     const handleClickOpen = (id) => {
         setOpen(true);
@@ -51,27 +49,6 @@ export default function TeacherFeaturedHomeworkSubmissionObjection(props) {
         })
     }
 
-    function handleRedirectToExpert(id) {
-        redirectToExpert(id).then((response) => {
-            if (response.data.success == true) {
-                toastSuccess("Redirected To Expert");
-            } else {
-                toastError("Error Occured")
-                console.log(response.data)
-            }
-        })
-
-    }
-
-    useEffect(() => {
-        getComments(post.id);
-    }, [])
-
-    function getComments(submissionID) {
-        getCommentsByHomeworkSubmissionId(submissionID).then((response) => {
-            props.setComments(response.data.data)
-        });
-    }
 
     function handleFileOpen() {
         seeFile(post.fileDTO.id, post.owner.id).then((response) => {
@@ -93,8 +70,8 @@ export default function TeacherFeaturedHomeworkSubmissionObjection(props) {
                     <div className={"submitted-homework-details-div-student"}>
                         <Typography>These are the Homework Submission performed objection by students.</Typography>
                         <Typography>For privacy you can not see Student details.</Typography>
-                        <Typography>You redirect the objection to Expert which you will choose from list</Typography>
-                        <Typography>or you can grade it by yourself</Typography>
+                        <Typography>These objections sent by Responsible Teacher to you.</Typography>
+                        <Typography>You can grade it and add comment!</Typography>
                         <Card sx={{maxWidth: 250}}>
                             <CardContent>
                                 <Typography variant="h6" component="h4">
@@ -104,34 +81,24 @@ export default function TeacherFeaturedHomeworkSubmissionObjection(props) {
                                 <Typography variant="h6" component="h6" color="green" className={"Objection-Button"}>
                                     Score : {post.gradeSubmission.givenPoint}
                                 </Typography>
-                                {post.gradeSubmission.state === "OBJECTION_FROM_GRADED" ?
-                                    <Button size="small"
-                                            onClick={() => handleRedirectToExpert(post.gradeSubmission.id)}
-                                    > Redirect To Expert
-                                        <Warning/>
-                                    </Button> : <text>Redirection Success</text>
-                                }
                                 <br/>
-                                {post.gradeSubmission.state !== "GRADED_AFTER_OBJECTION_BY_TEACHER" ?
-                                    <Button onClick={() => handleClickOpen(post.gradeSubmission.id)}>Grade by
-                                        Yourself <SearchRounded/> </Button> :
+                                {post.gradeSubmission.state === "SENT_TO_THE_EXPERT_BY_TEACHER" ?
+                                    <Button onClick={() => handleClickOpen(post.gradeSubmission.id)}>Grade The Objection <SearchRounded/> </Button> :
                                     <text>You successfully re-graded that Objection.</text>
                                 }
+
                                 <CardActions>
                                     <Button size="small" onClick={() => {
                                         handleFileOpen()
                                     }}>Submitted Homework</Button>
                                 </CardActions>
                             </CardContent>
+
                         </Card>
 
-                    </div> :
-                    <OpenDialogStudentSubmission setOpen={setOpen} open={open} handleCloseAndSave={handleCloseAndSave}
-                                                 handleClickOpen={handleClickOpen} handleClose={handleClose}
-                                                 grade={grade} setGrade={setGrade}
-                                                 comment={setComment} setComment={setComment}
-                                                 accountType={accountType}
-                    />
+                    </div> : <OpenDialogStudentSubmission setOpen={setOpen} open={open} handleCloseAndSave={handleCloseAndSave}
+                                                          handleClickOpen={handleClickOpen} handleClose={handleClose}
+                                                          grade={grade} setGrade={setGrade}/>
 
             }
         </div>

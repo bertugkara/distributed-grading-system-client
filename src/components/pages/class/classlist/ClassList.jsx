@@ -9,14 +9,18 @@ import {RefreshRounded} from "@mui/icons-material";
 export default function ClassList() {
 
     const navigate = useNavigate();
-    const {auth, accountType} = useContext(AuthenticationContext);
+    const {auth, accountType, handleLogout} = useContext(AuthenticationContext);
     const [lessons, setLessons] = useState([]);
-    const [refresh, setRefresh]= useState(0);
 
     function getAllLessons() {
         getAllClasses().then((response) => {
-            if (response.data.success == true) setLessons(response.data.data);
-            else toastError("Fetching Error")
+            if (response.data.success == true) {
+                setLessons(response.data.data);
+            } else if (response.status == 401) {
+                toastWarning("Your Login is expired please Login Again")
+                handleLogout();
+                navigate("/login")
+            }
         });
     }
 
@@ -37,25 +41,19 @@ export default function ClassList() {
         }
     }, [])
 
-    function isLessonsValid(lessons){
-        if( lessons === []) return false;
+    function isLessonsValid(lessons) {
+        if (lessons === [] || lessons === null ) return false;
         else return true;
     }
 
-    function getAllLessonsWithTimer(){
-
-        setTimeout(()=>{
-            getAllLessons()
-        },500);
-    }
 
     return <div>
         {
-                isLessonsValid() ?
-                    <ClassListView accountType={accountType} lessons={lessons}
-                                   handleLessonPageButton={handleLessonPageButton}
-                                   handleEditButton={handleEditButton}
-                    /> : <RefreshRounded onClick={getAllLessonsWithTimer}/>
+            isLessonsValid() ?
+                <ClassListView accountType={accountType} lessons={lessons}
+                               handleLessonPageButton={handleLessonPageButton}
+                               handleEditButton={handleEditButton}
+                /> :null
         }
     </div>
 }

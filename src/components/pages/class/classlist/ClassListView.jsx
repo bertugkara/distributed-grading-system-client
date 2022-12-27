@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 
 export default function ClassListView(props) {
 
-    function isEditButtonVisible(){
-        if(props.accountType == "ADMIN") return true
+    function isEditButtonVisible() {
+        if (props.accountType.includes("ADMIN")) return true
         else return false;
     }
 
@@ -35,7 +35,7 @@ export default function ClassListView(props) {
                 return (
                     <Button className={"Edit-Button"}
                             variant="contained"
-                            disabled={isEditButtonVisible}
+                            disabled={!isEditButtonVisible}
                             onClick={() => {
                                 props.handleEditButton(cellValues.id)
                             }}
@@ -50,13 +50,14 @@ export default function ClassListView(props) {
 
     return <div>
         <Box sx={{height: 650, width: 1200}}>
-            <DataGrid
-                rows={props.lessons}
-                columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
-                checkboxSelection
-            />
+            {props.lessons !== null ?
+                <DataGrid
+                    rows={props.lessons}
+                    columns={columns}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
+                    checkboxSelection
+                /> : null}
         </Box>
     </div>
 }

@@ -5,18 +5,34 @@ import Box from "@mui/material/Box";
 import StudentFeaturedProfilePostLessons from "../studentcomponents/StudentFeaturedProfilePostLessons";
 import StudentFeaturedHomeworkPost from "../studentcomponents/StudentFeaturedHomeworkPost";
 import StudentFeaturedHomeworkSubmission from "../studentcomponents/StudentFeaturedHomeworkSubmission";
-import React from "react";
+import React, {useState} from "react";
 import TeacherFeaturedProfilePostLesson from "./TeacherFeaturedProfilePostLessons";
 import TeacherFeaturedHomeworkPost from "./TeacherFeaturedHomeworkPost";
 import TeacherFeaturedHomeworkSubmissionObjection from "./TeacherFeaturedHomeworkSubmissionObjection";
+import CommentListView from "../commentlist/CommentListView";
 
 
 export default function TeacherProfileView(props) {
 
     const {data, mainFeaturedPost, accountType} = props;
+
+    const [open, setOpen] = useState(false);
+    const [comments, setComments] = useState({});
+    console.log(data)
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleCloseAndSave = () => {
+        setOpen(false);
+    };
     console.log(data)
     return (
-        <div>
+        <div> {open === false ?
             <div className={"lesson-page"}>
                 <HeaderComponent post={mainFeaturedPost} accountType={accountType}/>
                 <Container maxWidth="bg">
@@ -59,6 +75,10 @@ export default function TeacherProfileView(props) {
                                         .map((tempHomework) => (
                                             <TeacherFeaturedHomeworkSubmissionObjection key={tempHomework.id}
                                                                                         post={tempHomework}
+                                                                                        comments={comments}
+                                                                                        setComments={setComments}
+                                                                                        handleClickOpen={handleClickOpen}
+                                                                                        accountType={accountType}
                                             />
                                         ))}
                                 </Box>
@@ -69,10 +89,12 @@ export default function TeacherProfileView(props) {
                             </Grid>
                         }
                     </Grid>
-
                 </Container>
-            </div>
-
+            </div> : <CommentListView setOpen={setOpen} open={open} handleCloseAndSave={handleCloseAndSave}
+                                      handleClickOpen={handleClickOpen} handleClose={handleClose}
+                                      comment={comments} setComment={setComments}
+            />
+        }
         </div>
     )
 }

@@ -15,7 +15,7 @@ export default function SideBarView() {
     return (<div style={{display: 'flex', height: '100%', color: "inherit"}}>
         <Sidebar rootStyles={{
             [`.${sidebarClasses.container}`]: {
-                marginTop: 65,
+                marginTop: 57,
                 marginLeft: -15,
             },
         }}>

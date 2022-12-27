@@ -6,9 +6,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useState} from "react";
+import {useContext, useState} from "react";
+import CommentByStudent from "./CommentByStudent";
+import AuthenticationContext from "../../../../context/AuthenticationContext";
 
-export default function OpenDialog(props) {
+export default function OpenDialogStudentSubmission(props) {
+
+    const {accountType} = useContext(AuthenticationContext)
 
     const handleSetGrade = (e) => {
         props.setGrade(e.target.value);
@@ -33,6 +37,9 @@ export default function OpenDialog(props) {
                         onChange={handleSetGrade}
                     />
                 </DialogContent>
+                {accountType === "STUDENT" ?
+                    < CommentByStudent comment={props.comment} setComment={props.setComment}/>:null
+                }
                 <DialogActions>
                     <Button onClick={props.handleClose}>Cancel</Button>
                     <Button onClick={props.handleCloseAndSave}>Save</Button>

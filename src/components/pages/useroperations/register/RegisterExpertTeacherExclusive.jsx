@@ -40,11 +40,11 @@ export default function RegisterExpertTeacherExclusive(){
         if (auth !== true) {
             navigate("/login")
         }
-        if (accountType ==="TEACHER"){
+        if (accountType.includes("TEACHER") && accountType.includes("EXPERT")){
             setRegisterType("EXPERT")
             setRegisterLink(`expert/add`);
         }
-        else if (accountType !== "TEACHER") {
+        else if (!accountType.includes( "TEACHER")) {
             toastError("You have to be admin to access this page!")
             navigate("/")
         }

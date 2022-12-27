@@ -7,11 +7,19 @@
     margin: 5px;
     justify-content: center;
     padding: 10px;
+    width: 100%;
 }
 .description-submit-homework{
-
     margin: 5px;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: 2px;
+}
+.submit-button{
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     padding: 2px;
 }
